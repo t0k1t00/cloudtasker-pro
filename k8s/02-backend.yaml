@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudtasker-backend
+  namespace: cloudtasker
+  labels:
+    app: cloudtasker-backend
+    tier: backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloudtasker-backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: cloudtasker-backend
+        tier: backend
+    spec:
+      containers:
+        - name: backend
+          image: cloudtasker-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+              name: http
+          envFrom:
+            - configMapRef:
+                name: cloudtasker-config
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            failureThreshold: 3
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudtasker-backend-svc
+  namespace: cloudtasker
+  labels:
+    app: cloudtasker-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: cloudtasker-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+      protocol: TCP
+      name: http

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cloudtasker
+  labels:
+    name: cloudtasker
+    app.kubernetes.io/managed-by: kubectl
