@@ -1,6 +1,6 @@
 # CloudTasker Pro
 
-CloudTasker Pro is a cloud-native Kubernetes monitoring and task management dashboard built for a Cloud Computing assignment. It combines a modern SaaS-style interface with containerized backend services, Kubernetes deployment manifests, live infrastructure metrics, and task management features.
+CloudTasker Pro is a cloud-native Kubernetes monitoring and task management dashboard. It combines a modern SaaS-style interface with containerized backend services, Kubernetes deployment manifests, live infrastructure metrics, and task management features.
 
 The UI is inspired by modern cloud platforms such as Vercel, Datadog, and Grafana, with a dark glassmorphism design, animated components, and real-time monitoring visuals.
 
@@ -382,9 +382,26 @@ docker compose up --build
 
 ---
 
+## Screenshots
+
+Add screenshots of the dashboard here after running the application.
+
+~~~markdown
+![CloudTasker Pro Dashboard](screenshots/dashboard.png)
+~~~
+
+Suggested screenshots:
+
+- Dashboard overview
+- Task manager
+- Metrics charts
+- Kubernetes architecture diagram
+
+---
+
 ## Author
 
-Swathi B Raj
+[Swathi B Raj](https://github.com/t0k1t00)
 
 ---
 
